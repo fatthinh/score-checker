@@ -9,7 +9,9 @@ function Sidebar() {
 
   useEffect(() => {
     setActive(NAV_ITEMS.findIndex((item) => item.path === location.pathname));
-  }, [location]);
+  }, [location.pathname]);
+
+  console.log(active);
 
   return (
     <aside
