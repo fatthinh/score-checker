@@ -93,7 +93,7 @@ function Dashboard() {
 
   return (
     <div>
-      <div className="ml-auto w-1/5">
+      <div className="ml-auto md:w-1/5">
         <SingleSelect
           label="Subject"
           options={Object.values(SCORE_LABELS).map((item) => item)}

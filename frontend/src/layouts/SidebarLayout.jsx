@@ -50,7 +50,7 @@ function SidebarLayout({ children, name }) {
           <div className="md:relative bg-white -mt-12 mx-2 md:mr-8 rounded-lg p-4 min-h-[280px]">
             {children}
 
-            {/* <Flower className="!w-50 !h-50 absolute right-0 bottom-0 rounded-lg md:bg-white bg-neutral-200"  /> */}
+            <Flower className="!w-50 !h-50 absolute right-0 bottom-0 rounded-lg md:bg-white bg-neutral-200"  />
           </div>
         </main>
       </div>
