@@ -1,8 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 
-//axios.defaults.baseURL = 'http://52.221.193.90:8080/seventee/api/';
-axios.defaults.baseURL = "http://localhost:8000/app/";
+axios.defaults.baseURL = "https://lpthinh-sparta.site/app/";
 
 export const useAxios = (axiosParams, trigger = null) => {
   const [response, setResponse] = useState(null);
