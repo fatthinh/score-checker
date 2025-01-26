@@ -27,27 +27,27 @@ class StatisticView(APIView):
     @method_decorator(cache_page(60*60, key_prefix='score_statistic'))
     def get(self, request):
         subject_name = request.query_params["subject"]
-        content = {}
+        models = [
+            {"model": Subject, "score_model": Score},
+            {"model": ForeignLanguage, "score_model": ForeignScore},
+        ]
 
-        try:
-            subject = Subject.objects.get(name=subject_name)
-            scores = Score.objects.filter(subject__id=subject.id)
-            content = {"level01": len(scores.filter(value__lt=4)),
-                       "level02": len(scores.filter(value__gte=4, value__lt=6)),
-                       "level03": len(scores.filter(value__gte=6, value__lt=8)),
-                       "level04": len(scores.filter(value__gte=8))}
-        except:
+        for model_pair in models:
             try:
-                subject = ForeignLanguage.objects.get(name=subject_name)
-                scores = ForeignScore.objects.filter(subject__id=subject.id)
-                content = {"level01": len(scores.filter(value__lt=4)),
-                           "level02": len(scores.filter(value__gte=4, value__lt=6)),
-                           "level03": len(scores.filter(value__gte=6, value__lt=8)),
-                           "level04": len(scores.filter(value__gte=8))}
-            except:
-                return Response({"msg": "Not found subject"}, status=status.HTTP_404_NOT_FOUND)
+                subject = model_pair["model"].objects.get(name=subject_name)
+                scores = model_pair["score_model"].objects.filter(
+                    subject__id=subject.id)
+                content = {
+                    "level01": scores.filter(value__lt=4).count(),
+                    "level02": scores.filter(value__gte=4, value__lt=6).count(),
+                    "level03": scores.filter(value__gte=6, value__lt=8).count(),
+                    "level04": scores.filter(value__gte=8).count(),
+                }
+                return Response(content, status=status.HTTP_200_OK)
+            except model_pair["model"].DoesNotExist:
+                continue
 
-        return Response(content, status=status.HTTP_200_OK)
+        return Response({"msg": "Subject not found"}, status=status.HTTP_404_NOT_FOUND)
 
 
 class GroupAView(APIView):
