@@ -106,7 +106,7 @@ function Dashboard() {
         </div>
       ) : (
         <div className="flex justify-center ">
-          <div className="w-2/3">
+          <div className="md:w-2/3">
             <Bar options={options} data={data} classsName="" />
           </div>
         </div>

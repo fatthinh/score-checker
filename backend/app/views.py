@@ -24,7 +24,7 @@ class SearchView(APIView):
 
 
 class StatisticView(APIView):
-    @method_decorator(cache_page(10, key_prefix='score_statistic'))
+    @method_decorator(cache_page(60*60, key_prefix='score_statistic'))
     def get(self, request):
         subject_name = request.query_params["subject"]
         content = {}
@@ -52,7 +52,7 @@ class StatisticView(APIView):
 
 class GroupAView(APIView):
 
-    @method_decorator(cache_page(10, key_prefix='candidates_groupa'))
+    @method_decorator(cache_page(60*60, key_prefix='candidates_groupa'))
     def get(self, request):
         subject_names = ['toan', 'vat_li', 'hoa_hoc']
 
