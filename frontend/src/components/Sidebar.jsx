@@ -11,8 +11,6 @@ function Sidebar() {
     setActive(NAV_ITEMS.findIndex((item) => item.path === location.pathname));
   }, [location.pathname]);
 
-  console.log(active);
-
   return (
     <aside
       id="main-sidebar"
@@ -22,11 +20,13 @@ function Sidebar() {
         <div className="flex items-center h-20 py-5 text-primary-100 px-3">
           <h1 className="font-medium text-sm tracking-wide">Menu</h1>
         </div>
-        <nav
-          className={`relative grid after:absolute after:top-${
-            active * 14
-          } after:left-0 after:h-14 after:w-1 after:bg-primary-200 after:transition-discrete after:duration-500`}
-        >
+        <nav className="relative">
+          <div
+            className={`absolute w-1 h-14 left-0 bg-primary-200 transition-all duration-500`}
+            style={{
+              top: active * 56,
+            }}
+          ></div>
           {NAV_ITEMS.map((item, index) => (
             <Link
               className={`flex gap-6 items-center h-14 w-full px-5 ${
