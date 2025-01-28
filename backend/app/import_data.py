@@ -2,7 +2,7 @@ import pandas as pd
 from .models import *
 
 # Read CSV file into a DataFrame
-csv_file_path = "D:/workspace/golden-owl/backend/db/diem_thi_thpt_2024.csv"
+csv_file_path = "D:/workspace/golden-owl/score-checker/backend/db/diem_thi_thpt_2024_contain.csv"
 df = pd.read_csv(csv_file_path, dtype={'sbd': str})
 
 subjects = ["toan", "ngu_van", "ngoai_ngu", "vat_li", "hoa_hoc",
